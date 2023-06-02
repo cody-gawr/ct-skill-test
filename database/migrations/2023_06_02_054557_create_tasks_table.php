@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('project_id')
-                    ->constrained(table: 'projects', indexName: 'tasks_project_id');
+                ->constrained(table: 'projects', indexName: 'tasks_project_id');
+            $table->unsignedSmallInteger('priority')->default(1);
             $table->timestamps();
         });
     }

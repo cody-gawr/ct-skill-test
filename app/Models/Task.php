@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Project extends Model
+class Task extends Model
 {
     use HasFactory;
 
@@ -15,10 +15,10 @@ class Project extends Model
      *
      * @var string
      */
-    protected $table = 'projects';
+    protected $table = 'tasks';
 
-    public function tasks(): HasMany
+    public function project(): BelongsTo
     {
-        return $this->hasMany(Task::class, 'project_id', 'id');
+        return $this->belongsTo(Project::class, 'project_id', 'id');
     }
 }
