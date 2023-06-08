@@ -1,4 +1,4 @@
-<x-layout>
+<div class="container">
     <div class="row my-4">
         <div class="mx-auto">
             <div class="btn-group">
@@ -6,13 +6,11 @@
                     Projects
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
+                    @foreach ($projects as $project)
+                        <a class="dropdown-item" href="#">{{ $project->name }}</a>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
-</x-layout>
+</div>

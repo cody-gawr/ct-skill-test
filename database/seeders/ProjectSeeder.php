@@ -21,5 +21,6 @@ class ProjectSeeder extends Seeder
                     Task::factory()
                         ->count(5)
         )->create();
+        Project::unguard();
     }
 }
