@@ -19,6 +19,16 @@ class ShowTask extends Component
 
     public Collection $projects;
 
+    protected $listeners = ['setFooProperty'];
+
+    public $foo;
+
+    public function setFooProperty($value)
+    {
+        $this->foo = $value;
+        dd($this->foo);
+    }
+
     /**
      * @param \App\Contracts\ProjectContract $projectContract
      */

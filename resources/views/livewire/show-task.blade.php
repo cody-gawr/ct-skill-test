@@ -1,13 +1,15 @@
 <div class="container">
     <div class="my-4">
+        @error('task.name')
+            <div class="alert alert-danger" role="alert">
+                {{ $message }}
+            </div>
+        @enderror
         <form wire:submit.prevent="save">
             <div class="form-row align-items-center">
                 <div class="col-sm-3 my-1">
                     <label class="sr-only" for="inlineFormInputName">Name</label>
                     <input type="text" class="form-control" wire:model="task.name">
-                    @error('task.name')
-                        <p class='text-danger inputerror'>{{ $message }} </p>
-                    @enderror
                 </div>
                 <div class="col-sm-5 my-1">
                     <div class="btn-group">
@@ -30,6 +32,15 @@
                 </div>
             </div>
         </form>
+        <button class="btn btn-primary" id="test" x-on:click="handleClick">Save1</button>
+
         <a href="{{ route('show.projects') }}">Show Projects</a>
     </div>
 </div>
+
+<script>
+    window.addEventListener("load", () => {
+        console.log("Hello World!");
+        Livewire.emit('setFooProperty', 'bar');
+    });
+</script>
