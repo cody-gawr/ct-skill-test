@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\TaskDetail;
 use App\Http\Livewire\Projects;
 
 /*
@@ -15,3 +16,4 @@ use App\Http\Livewire\Projects;
 */
 
 Route::get('/', Projects::class);
+Route::get('/project/{project}/task/{task}', TaskDetail::class)->name('task.detail');

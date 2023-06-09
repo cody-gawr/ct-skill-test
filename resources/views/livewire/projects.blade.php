@@ -1,7 +1,7 @@
 <div class="container">
     <div class="my-4">
         <div class="btn-group">
-            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
                 {{ $project ? $project->name : 'projects' }}
             </button>
             <div class="dropdown-menu">
@@ -16,7 +16,15 @@
         @foreach ($tasks as $task)
             <div class="card">
                 <div class="card-body">
-                    {{ $task->name }}<span class="badge badge-pill badge-danger">{{ $task->priority }}</span>
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <a href="{{ route('task.detail', ['project' => $project->id, 'task' => $task->id]) }}">{{ $task->name }}</a>
+                            <span class="badge badge-primary">{{ $task->priority }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         @endforeach
