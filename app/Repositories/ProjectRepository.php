@@ -13,6 +13,11 @@ class ProjectRepository
 
     public function all(): Collection
     {
+        return $this->project->all();
+    }
+
+    public function allWithTasks(): Collection
+    {
         return $this->project->with('tasks')->get();
     }
 }

@@ -7,13 +7,16 @@ use App\Contracts\ProjectContract;
 use App\Models\Project;
 use Livewire\Component;
 
-class Projects extends Component
+class ShowProjects extends Component
 {
     private ProjectContract $projectContract;
     public Collection $projects;
     public Collection $tasks;
     public Project $project;
 
+    /**
+     * @param \App\Contracts\ProjectContract $projectContract
+     */
     public function boot(
         ProjectContract $projectContract
     ) {
@@ -22,12 +25,12 @@ class Projects extends Component
 
     public function render()
     {
-        return view('livewire.projects');
+        return view('livewire.show-projects');
     }
 
     public function mount()
     {
-        $this->projects = $this->projectContract->all();
+        $this->projects = $this->projectContract->allWithTasks();
         $this->tasks = new Collection();
     }
 

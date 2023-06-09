@@ -18,7 +18,8 @@
                 <div class="card-body">
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
-                            <a href="{{ route('task.detail', ['project' => $project->id, 'task' => $task->id]) }}">{{ $task->name }}</a>
+                            <a
+                                href="{{ route('show.task', ['project' => $project->id, 'task' => $task->id]) }}">{{ $task->name }}</a>
                             <span class="badge badge-primary">{{ $task->priority }}</span>
                         </div>
                         <div class="col-auto">
