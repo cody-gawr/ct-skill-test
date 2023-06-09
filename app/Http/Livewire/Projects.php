@@ -2,14 +2,17 @@
 
 namespace App\Http\Livewire;
 
-use App\Contracts\ProjectContract;
 use Illuminate\Database\Eloquent\Collection;
+use App\Contracts\ProjectContract;
+use App\Models\Project;
 use Livewire\Component;
 
 class Projects extends Component
 {
     private ProjectContract $projectContract;
     public Collection $projects;
+    public Collection $tasks;
+    public Project $project;
 
     public function boot(
         ProjectContract $projectContract
@@ -25,5 +28,12 @@ class Projects extends Component
     public function mount()
     {
         $this->projects = $this->projectContract->all();
+        $this->tasks = new Collection();
+    }
+
+    public function selectProject(Project $project)
+    {
+        $this->project = $project;
+        $this->tasks = $this->project->tasks;
     }
 }
