@@ -7,7 +7,8 @@
             <div class="dropdown-menu">
                 @foreach ($projects as $project)
                     <a class="dropdown-item" href="#"
-                        wire:click="selectProject({{ $project->id }})">{{ $project->name }}</a>
+                        wire:click="select({{ $project->id }})"
+                        wire:key="project-{{ $project->id }}">{{ $project->name }}</a>
                 @endforeach
             </div>
         </div>
@@ -19,11 +20,12 @@
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
                             <a
-                                href="{{ route('show.task', ['project' => $project->id, 'task' => $task->id]) }}">{{ $task->name }}</a>
+                                href="{{ route('show.task', ['project' => $project->id, 'task' => $task->id]) }}"
+                                wire:key="task-{{ $task->id }}">{{ $task->name }}</a>
                             <span class="badge badge-primary">{{ $task->priority }}</span>
                         </div>
                         <div class="col-auto">
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn btn-danger" wire:click="deleteTask({{ $task->id }})">Delete {{ $task->id }}</button>
                         </div>
                     </div>
                 </div>

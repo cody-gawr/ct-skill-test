@@ -11,13 +11,23 @@ class ProjectRepository
         public readonly Project $project
     ) {}
 
-    public function all(): Collection
+    public function getAll(): Collection
     {
         return $this->project->all();
     }
 
-    public function allWithTasks(): Collection
+    public function getAllWithTasks(): Collection
     {
         return $this->project->with('tasks')->get();
+    }
+
+    /**
+     * @param \App\Models\Project  $project
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getTasks(Project $project): Collection
+    {
+        return $project->tasks()->get();
     }
 }

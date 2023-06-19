@@ -3,8 +3,8 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Database\Eloquent\Collection;
-use App\Contracts\ProjectContract;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Contracts\ProjectContract;
 use App\Models\Project;
 use Livewire\Component;
 use App\Models\Task;
@@ -26,7 +26,6 @@ class ShowTask extends Component
     public function setFooProperty($value)
     {
         $this->foo = $value;
-        dd($this->foo);
     }
 
     /**
@@ -41,7 +40,7 @@ class ShowTask extends Component
     {
         $this->project = $project;
         $this->task = $task;
-        $this->projects = $this->projectContract->all();
+        $this->projects = $this->projectContract->getAll();
     }
     public function render()
     {

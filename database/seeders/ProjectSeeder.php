@@ -17,10 +17,8 @@ class ProjectSeeder extends Seeder
     {
         Project::unguard();
         Project::factory()->count(3)
-                ->has(
-                    Task::factory()
-                        ->count(5)
-        )->create();
-        Project::unguard();
+            ->has(Task::factory()->count(5))
+            ->create();
+        Project::reguard();
     }
 }

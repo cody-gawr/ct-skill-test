@@ -4,15 +4,18 @@ namespace App\Http\Livewire;
 
 use Illuminate\Database\Eloquent\Collection;
 use App\Contracts\ProjectContract;
-use App\Models\Project;
 use Livewire\Component;
+use App\Models\Project;
 
 class ShowProjects extends Component
 {
     private ProjectContract $projectContract;
+
     public Collection $projects;
+
     public Collection $tasks;
-    public Project $project;
+
+    public ?Project $project = null;
 
     /**
      * @param \App\Contracts\ProjectContract $projectContract
@@ -30,13 +33,22 @@ class ShowProjects extends Component
 
     public function mount()
     {
-        $this->projects = $this->projectContract->allWithTasks();
+        $this->project = null;
+        $this->projects = $this->projectContract->getAll();
         $this->tasks = new Collection();
     }
 
-    public function selectProject(Project $project)
+    public function select(Project $project)
     {
         $this->project = $project;
-        $this->tasks = $this->project->tasks;
+        $this->tasks = $this->projectContract->getTasks($this->project);
+    }
+
+    public function deleteTask(int $taskId)
+    {
+        $this->project->tasks()
+            ->where('id', $taskId)
+            ->delete();
+        $this->tasks = $this->projectContract->getTasks($this->project);
     }
 }

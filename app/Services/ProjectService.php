@@ -5,6 +5,7 @@ namespace App\Services;
 use Illuminate\Database\Eloquent\Collection;
 use App\Repositories\ProjectRepository;
 use App\Contracts\ProjectContract;
+use App\Models\Project;
 
 class ProjectService implements ProjectContract
 {
@@ -15,13 +16,16 @@ class ProjectService implements ProjectContract
         public readonly ProjectRepository $projectRepository
     ) {}
 
-    public function all(): Collection
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAll(): Collection
     {
-        return $this->projectRepository->all();
+        return $this->projectRepository->getAll();
     }
 
-    public function allWithTasks(): Collection
+    public function getTasks(Project $project): Collection
     {
-        return $this->projectRepository->allWithTasks();
+        return $this->projectRepository->getTasks($project);
     }
 }
