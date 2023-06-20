@@ -15,7 +15,7 @@
     </div>
     <div class="column">
         @foreach ($tasks as $task)
-            <div class="card">
+            <div class="card" draggable="true">
                 <div class="card-body">
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
@@ -33,3 +33,78 @@
         @endforeach
     </div>
 </div>
+
+<script>
+    window.addEventListener("load", () => {
+        // Livewire.emit('setFooProperty', 'bar');
+    });
+
+    window.addEventListener('project-loaded', event => {
+        alert('Name updated to: ' + event.detail.projectId);
+        const cards =  document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('dragstart', handleDragStart)
+            card.addEventListener('dragenter', handleDragEnter)
+            card.addEventListener('dragover', handleDragOver);
+            card.addEventListener('dragleave', handleDragLeave);
+            card.addEventListener('drop', handleDrop);
+            card.addEventListener('dragend', handleDragEnd);
+        });
+
+        const draggingClass = 'dragging';
+        var dragSource;
+
+        function handleDragStart(e) {
+            dragSource = this;
+            e.target.classList.add(draggingClass);
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+        }
+
+        function handleDragEnter(e) {
+            this.classList.add('over');
+        }
+
+        function handleDragOver(e) {
+            e.dataTransfer.dropEffect = 'move';
+            e.preventDefault();
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('over');
+        }
+
+        function handleDrop(e) {
+            e.stopPropagation();
+
+            if (dragSource !== this) {
+                dragSource.innerHTML = this.innerHTML;
+                this.innerHTML = e.dataTransfer.getData('text/html');
+            }
+            e.preventDefault();
+        }
+
+        function handleDragEnd(e) {
+            Array.prototype.forEach.call(cards, function (card) {
+                ['over', 'dragging'].forEach(function (className) {
+                card.classList.remove(className);
+                });
+            });
+        }
+    });
+</script>
+
+<style>
+    .hide {
+        display: none;
+    }
+    &.dragging {
+        opacity 0.5
+    }
+    &.over {
+        border 3px dashed black
+    }
+    [draggable] {
+        user-select none
+    }
+</style>

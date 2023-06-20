@@ -37,10 +37,3 @@
         <a href="{{ route('show.projects') }}">Show Projects</a>
     </div>
 </div>
-
-<script>
-    window.addEventListener("load", () => {
-        console.log("Hello World!");
-        Livewire.emit('setFooProperty', 'bar');
-    });
-</script>

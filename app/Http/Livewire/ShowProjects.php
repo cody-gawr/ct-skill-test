@@ -42,6 +42,7 @@ class ShowProjects extends Component
     {
         $this->project = $project;
         $this->tasks = $this->projectContract->getTasks($this->project);
+        $this->dispatchBrowserEvent('project-loaded', ['projectId' => $project->id]);
     }
 
     public function deleteTask(int $taskId)
